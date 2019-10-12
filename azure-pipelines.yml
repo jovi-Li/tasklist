@@ -41,7 +41,14 @@ stages:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           ArtifactName: 'drop'
           publishLocation: 'Container'
-    
+      - task: DockerCompose@0
+        inputs:
+          containerregistrytype: 'Container Registry'
+          dockerRegistryEndpoint: 'aws'
+          dockerComposeFile: '**/docker-compose.yml'
+          action: 'Push services'
+          includeSourceTags: true
+          includeLatestTag: true
       - task: ECRPushImage@1
         inputs:
           awsCredentials: 'aws dev'
