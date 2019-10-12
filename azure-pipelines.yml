@@ -23,40 +23,41 @@ stages:
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
+          dockerRegistryEndpoint: 'aws'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
           additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
           includeLatestTag: true
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: 'src'
-          Contents: |
-            **/*.yml
-            **/*.yaml
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
+      # - task: CopyFiles@2
+      #   inputs:
+      #     SourceFolder: 'src'
+      #     Contents: |
+      #       **/*.yml
+      #       **/*.yaml
+      #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      # - task: PublishBuildArtifacts@1
+      #   inputs:
+      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      #     ArtifactName: 'drop'
+      #     publishLocation: 'Container'
+
+      # # - task: ECRPushImage@1
+      # #   inputs:
+      # #     awsCredentials: 'aws dev'
+      # #     regionName: 'us-east-1'
+      # #     imageSource: 'imagename'
+      # #     sourceImageName: 'tasklist-service'
+      # #     sourceImageTag: '$(Build.BuildNumber)'
+      # #     repositoryName: 'relay-dev'
+      # #     pushTag: '$(Build.BuildNumber)'
+      # #     autoCreateRepository: true
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'aws'
           dockerComposeFile: '**/docker-compose.yml'
-          additionalImageTags: '$(Build.BuildNumber)'
           action: 'Push services'
+          additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
           includeLatestTag: true
-      # - task: ECRPushImage@1
-      #   inputs:
-      #     awsCredentials: 'aws dev'
-      #     regionName: 'us-east-1'
-      #     imageSource: 'imagename'
-      #     sourceImageName: 'tasklist-service'
-      #     sourceImageTag: '$(Build.BuildNumber)'
-      #     repositoryName: 'relay-dev'
-      #     pushTag: '$(Build.BuildNumber)'
-      #     autoCreateRepository: true
