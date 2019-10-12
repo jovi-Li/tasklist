@@ -20,7 +20,6 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
@@ -30,6 +29,13 @@ stages:
           additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
           includeLatestTag: true
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: 'src'
+          Contents: |
+            **/*.yml
+            **/*.yaml
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
