@@ -57,7 +57,7 @@ stages:
           regionName: 'us-east-1'
           awsCommand: 'ecr'
           awsSubCommand: 'get-login'
-          awsArguments: '--no-include-email -'
+          awsArguments: '--no-include-email'
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
