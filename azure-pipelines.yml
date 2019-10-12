@@ -46,5 +46,6 @@ stages:
           awsCredentials: 'aws dev'
           regionName: 'us-east-1'
           imageSource: 'imagename'
+          sourceImageName: 'tasklist-service'
           repositoryName: 'relay_dev'
           autoCreateRepository: true
