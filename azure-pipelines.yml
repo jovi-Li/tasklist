@@ -46,16 +46,17 @@ stages:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'aws'
           dockerComposeFile: '**/docker-compose.yml'
+          additionalImageTags: '$(Build.BuildNumber)'
           action: 'Push services'
           includeSourceTags: true
           includeLatestTag: true
-      - task: ECRPushImage@1
-        inputs:
-          awsCredentials: 'aws dev'
-          regionName: 'us-east-1'
-          imageSource: 'imagename'
-          sourceImageName: 'tasklist-service'
-          sourceImageTag: '$(Build.BuildNumber)'
-          repositoryName: 'relay-dev'
-          pushTag: '$(Build.BuildNumber)'
-          autoCreateRepository: true
+      # - task: ECRPushImage@1
+      #   inputs:
+      #     awsCredentials: 'aws dev'
+      #     regionName: 'us-east-1'
+      #     imageSource: 'imagename'
+      #     sourceImageName: 'tasklist-service'
+      #     sourceImageTag: '$(Build.BuildNumber)'
+      #     repositoryName: 'relay-dev'
+      #     pushTag: '$(Build.BuildNumber)'
+      #     autoCreateRepository: true
