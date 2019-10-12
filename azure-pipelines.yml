@@ -50,14 +50,24 @@ stages:
       # #     sourceImageName: 'tasklist-service'
       # #     sourceImageTag: '$(Build.BuildNumber)'
       # #     repositoryName: 'relay-dev'
-      # #     pushTag: '$(Build.BuildNumber)'
-      # #     autoCreateRepository: true
-      - task: DockerCompose@0
+      # #     pushTag: '
+      - task: ECRPushImage@1
         inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'aws'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Push services'
-          additionalImageTags: '$(Build.BuildNumber)'
-          includeSourceTags: true
-          includeLatestTag: true
+          awsCredentials: 'aws dev'
+          regionName: 'us-east-1'
+          imageSource: 'imagename'
+          sourceImageName: 'tasklist-service'
+          sourceImageTag: '$(Build.BuildNumber)'
+          repositoryName: 'tasklist-service'
+          pushTag: '$(Build.BuildNumber)'
+          autoCreateRepository: true
+      # #     autoCreateRepository: true
+      # - task: DockerCompose@0
+      #   inputs:
+      #     containerregistrytype: 'Container Registry'
+      #     dockerRegistryEndpoint: 'aws'
+      #     dockerComposeFile: '**/docker-compose.yml'
+      #     action: 'Push services'
+      #     additionalImageTags: '$(Build.BuildNumber)'
+      #     includeSourceTags: true
+      #     includeLatestTag: true
