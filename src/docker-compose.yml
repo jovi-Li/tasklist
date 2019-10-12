@@ -7,7 +7,7 @@ services:
     container_name: tasklist-db
   
   service:
-    image: tasklist-service
+    image: jovili/tasklist-service
     build:
       context: service/tasklist
       dockerfile: TaskList.Service/Dockerfile
@@ -26,7 +26,7 @@ services:
     container_name: tasklist-service
 
   web:
-    image: tasklist-web
+    image: jovili/tasklist-web
     build:
       context: client/tasklist
       dockerfile: Dockerfile
