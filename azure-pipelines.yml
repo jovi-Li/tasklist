@@ -20,6 +20,14 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+
+      - task: AWSCLI@1
+        inputs:
+          awsCredentials: 'aws dev'
+          regionName: 'us-east-1'
+          awsCommand: 'ecr'
+          awsSubCommand: 'get-login'
+          awsArguments: '--no-include-email'
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
@@ -27,8 +35,15 @@ stages:
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
           additionalImageTags: '$(Build.BuildNumber)'
-          includeSourceTags: true
-          includeLatestTag: true
+      # - task: DockerCompose@0
+      #   inputs:
+      #     containerregistrytype: 'Container Registry'
+      #     dockerRegistryEndpoint: 'aws'
+      #     dockerComposeFile: '**/docker-compose.yml'
+      #     action: 'Build services'
+      #     additionalImageTags: '$(Build.BuildNumber)'
+      #     includeSourceTags: true
+      #     includeLatestTag: true
       # - task: CopyFiles@2
       #   inputs:
       #     SourceFolder: 'src'
@@ -51,13 +66,6 @@ stages:
       # #     sourceImageTag: '$(Build.BuildNumber)'
       # #     repositoryName: 'relay-dev'
       # #     pushTag: '
-      - task: AWSCLI@1
-        inputs:
-          awsCredentials: 'aws dev'
-          regionName: 'us-east-1'
-          awsCommand: 'ecr'
-          awsSubCommand: 'get-login'
-          awsArguments: '--no-include-email'
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
