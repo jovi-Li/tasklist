@@ -35,6 +35,8 @@ stages:
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
           additionalImageTags: '$(Build.BuildNumber)'
+          includeSourceTags: true
+          includeLatestTag: true
       # - task: DockerCompose@0
       #   inputs:
       #     containerregistrytype: 'Container Registry'
