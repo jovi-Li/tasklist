@@ -27,6 +27,7 @@ stages:
           dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
+          additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
           includeLatestTag: true
       - task: DockerCompose@0
@@ -34,6 +35,7 @@ stages:
           containerregistrytype: 'Container Registry'
           dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
           dockerComposeFile: '**/docker-compose.yml'
+          additionalImageTags: '$(Build.BuildNumber)'
           action: 'Push services'
           includeSourceTags: true
           includeLatestTag: true
