@@ -41,11 +41,14 @@ stages:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
           ArtifactName: 'drop'
           publishLocation: 'Container'
+    
       - task: ECRPushImage@1
         inputs:
           awsCredentials: 'aws dev'
           regionName: 'us-east-1'
           imageSource: 'imagename'
           sourceImageName: 'tasklist-service'
-          repositoryName: 'relay_dev'
+          sourceImageTag: '$(Build.BuildNumber)'
+          repositoryName: 'relay-dev'
+          pushTag: '$(Build.BuildNumber)'
           autoCreateRepository: true
