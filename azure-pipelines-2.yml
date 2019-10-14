@@ -20,10 +20,18 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: Docker@2
-      displayName: Build an image
+
+    - task: AWSCLI@1
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/src/client/tasklist/Dockerfile'
-        tags: |
-          $(tag)
+        awsCredentials: 'aws dev'
+        regionName: 'us-east-1'
+        awsCommand: 'ecr'
+        awsSubCommand: 'get-login'
+        awsArguments: '--no-include-email'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'aws'
+        repository: 'jovili'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
