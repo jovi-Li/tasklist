@@ -60,5 +60,14 @@ stages:
     #     repository: 'jovili'
     #     command: 'build'
     #     Dockerfile: '**/Dockerfile'
-        
-
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'aws dev'
+        regionName: 'us-east-1'
+        imageSource: 'imagename'
+        sourceImageName: 'jovili/tasklist-web'
+        sourceImageTag: '$(Build.BuildId)'
+        repositoryName: 'jovili/tasklist-web'
+        autoCreateRepository: true
+        logRequest: true
+        logResponse: true
