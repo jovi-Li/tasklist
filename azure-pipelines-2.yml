@@ -43,4 +43,5 @@ stages:
         imageSource: 'imageid'
         sourceImageId: '$(Build.BuildId)'
         repositoryName: 'jovili'
+        pushTag: '$(Build.BuildNumber)'
         autoCreateRepository: true
