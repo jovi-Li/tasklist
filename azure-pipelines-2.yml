@@ -29,9 +29,11 @@ stages:
         awsSubCommand: 'get-login'
         awsArguments: '--no-include-email'
 
-    - task: Docker@2
+    - task: ECRPushImage@1
       inputs:
-        containerRegistry: 'aws'
-        repository: 'jovili'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        awsCredentials: 'aws dev'
+        regionName: 'us-east-1'
+        imageSource: 'imagename'
+        sourceImageName: 'jovili/tasklist-web'
+        repositoryName: 'jovi'
+        autoCreateRepository: true
