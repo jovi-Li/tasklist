@@ -27,7 +27,7 @@ stages:
         regionName: 'us-east-1'
         awsCommand: 'ecr'
         awsSubCommand: 'get-login'
-        awsArguments: '--no-include-email |sh'
+        awsArguments: '|sh'
 
     - task: Docker@2
       inputs:
