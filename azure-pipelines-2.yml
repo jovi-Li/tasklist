@@ -45,7 +45,7 @@ stages:
     
     - task: Docker@2
       inputs:
-        containerRegistry: 'jovi''s Docker Hub Connection'
+        containerRegistry: 'aws'
         repository: 'jovili/tasklist-web'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
