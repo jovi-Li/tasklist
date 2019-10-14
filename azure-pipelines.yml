@@ -59,21 +59,32 @@ stages:
       #     ArtifactName: 'drop'
       #     publishLocation: 'Container'
 
+
+
       # # - task: ECRPushImage@1
       # #   inputs:
       # #     awsCredentials: 'aws dev'
       # #     regionName: 'us-east-1'
       # #     imageSource: 'imagename'
       # #     sourceImageName: 'tasklist-service'
-      # #     sourceImageTag: '$(Build.BuildNumber)'
-      # #     repositoryName: 'relay-dev'
-      # #     pushTag: '
+      # #     sourceImageTag: '
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'aws'
+          dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Push services'
           additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
-          includeLatestTag: true
+          includeLatestTag: true'
+      # #     repositoryName: 'relay-dev'
+      # #     pushTag: '
+      # - task: DockerCompose@0
+      #   inputs:
+      #     containerregistrytype: 'Container Registry'
+      #     dockerRegistryEndpoint: 'aws'
+      #     dockerComposeFile: '**/docker-compose.yml'
+      #     action: 'Push services'
+      #     additionalImageTags: '$(Build.BuildNumber)'
+      #     includeSourceTags: true
+      #     includeLatestTag: true
