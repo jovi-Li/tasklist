@@ -33,7 +33,7 @@ stages:
       inputs:
         containerRegistry: 'aws'
         repository: 'jovili/tasklist-web'
-        command: 'buildAndPush'
+        command: 'build'
         Dockerfile: '**/Dockerfile'
     # - task: Docker@2
     #   inputs:
@@ -47,4 +47,17 @@ stages:
     #     containerRegistry: 'aws'
     #     repository: 'jovili'
     #     command: 'push'
-    #     tags: '$(Build.BuildId)'
+    #     tags: '
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'aws dev'
+        regionName: 'us-east-1'
+        imageSource: 'imagename'
+        sourceImageName: 'jovili/tasklist-web'
+        sourceImageTag: '$(Build.BuildId)'
+        repositoryName: 'jovili/tasklist-web'
+        pushTag: '$(Build.BuildId)'
+        autoCreateRepository: true
+        logRequest: true
+        logResponse: true
+
