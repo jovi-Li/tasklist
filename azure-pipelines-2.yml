@@ -32,12 +32,13 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'aws'
-        repository: 'jovili/tasklist-web'
+        repository: 'jovili'
         command: 'build'
         Dockerfile: '**/Dockerfile'
-        tags: '$(Build.BuildId)'
+        
     - task: Docker@2
       inputs:
         containerRegistry: 'aws'
         repository: 'jovili'
         command: 'push'
+        tags: '$(Build.BuildId)'
