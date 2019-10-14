@@ -52,7 +52,7 @@ stages:
       inputs:
         containerRegistry: 'aws'
         repository: 'jovili/tasklist-web'
-        command: 'buildAndPush'
+        command: 'build'
         Dockerfile: '**/Dockerfile'
     # - task: Docker@2
     #   inputs:
