@@ -50,11 +50,10 @@ stages:
     
     - task: Docker@2
       inputs:
-        containerRegistry: 'aws'
+        containerRegistry: 'jovi''s Docker Hub Connection'
         repository: 'jovili/tasklist-web'
         command: 'build'
         Dockerfile: '**/Dockerfile'
-        tags: $(tag)
     # - task: Docker@2
     #   inputs:
     #     containerRegistry: 'aws'
