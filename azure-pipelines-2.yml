@@ -21,13 +21,13 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
 
-    - task: AWSCLI@1
-      inputs:
-        awsCredentials: 'aws dev'
-        regionName: 'us-east-1'
-        awsCommand: 'ecr'
-        awsSubCommand: 'get-login'
-        awsArguments: '--no-include-email'
+    # - task: AWSCLI@1
+    #   inputs:
+    #     awsCredentials: 'aws dev'
+    #     regionName: 'us-east-1'
+    #     awsCommand: 'ecr'
+    #     awsSubCommand: 'get-login'
+    #     awsArguments: '--no-include-email'
 
     # - task: Docker@2
     #   inputs:
@@ -46,6 +46,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'jovi''s Docker Hub Connection'
-        repository: 'jovili'
+        repository: 'jovili/tasklist-web'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    
