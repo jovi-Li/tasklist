@@ -27,7 +27,7 @@ stages:
         regionName: 'us-east-1'
         awsCommand: 'ecr'
         awsSubCommand: 'get-login'
-        awsArguments: '--no-include-email'
+        awsArguments: '--no-include-email | sh'
 
     - task: Docker@2
       inputs:
@@ -42,22 +42,22 @@ stages:
     #     command: 'build'
     #     Dockerfile: '**/Dockerfile'
         
-    # - task: Docker@2
-    #   inputs:
-    #     containerRegistry: 'aws'
-    #     repository: 'jovili'
-    #     command: 'push'
-    #     tags: '
-    - task: ECRPushImage@1
+    - task: Docker@2
       inputs:
-        awsCredentials: 'aws dev'
-        regionName: 'us-east-1'
-        imageSource: 'imagename'
-        sourceImageName: 'jovili/tasklist-web'
-        sourceImageTag: '$(Build.BuildId)'
-        repositoryName: 'jovili/tasklist-web'
-        pushTag: '$(Build.BuildId)'
-        autoCreateRepository: true
-        logRequest: true
-        logResponse: true
+        containerRegistry: 'aws'
+        repository: 'jovili'
+        command: 'push'
+        tags: 
+    # - task: ECRPushImage@1
+    #   inputs:
+    #     awsCredentials: 'aws dev'
+    #     regionName: 'us-east-1'
+    #     imageSource: 'imagename'
+    #     sourceImageName: 'jovili/tasklist-web'
+    #     sourceImageTag: '$(Build.BuildId)'
+    #     repositoryName: 'jovili/tasklist-web'
+    #     pushTag: '$(Build.BuildId)'
+    #     autoCreateRepository: true
+    #     logRequest: true
+    #     logResponse: true
 
