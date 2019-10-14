@@ -21,13 +21,13 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
 
-    # - task: AWSCLI@1
-    #   inputs:
-    #     awsCredentials: 'aws dev'
-    #     regionName: 'us-east-1'
-    #     awsCommand: 'ecr'
-    #     awsSubCommand: 'get-login'
-    #     awsArguments: '--no-include-email'
+    - task: AWSCLI@1
+      inputs:
+        awsCredentials: 'aws dev'
+        regionName: 'us-east-1'
+        awsCommand: 'ecr'
+        awsSubCommand: 'get-login'
+        awsArguments: '--no-include-email'
 
     # - task: Docker@2
     #   inputs:
