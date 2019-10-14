@@ -29,6 +29,12 @@ stages:
         awsSubCommand: 'get-login'
         awsArguments: '--no-include-email'
 
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'aws'
+        repository: 'jovili/tasklist-web'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
     # - task: Docker@2
     #   inputs:
     #     containerRegistry: 'aws'
@@ -42,15 +48,3 @@ stages:
     #     repository: 'jovili'
     #     command: 'push'
     #     tags: '$(Build.BuildId)'
-    
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'aws'
-        command: 'login'
-    
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'aws'
-        repository: 'jovili/tasklist-web'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
