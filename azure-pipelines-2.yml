@@ -28,15 +28,20 @@ stages:
     #     awsCommand: 'ecr'
     #     awsSubCommand: 'get-login'
     #     awsArguments: '--no-include-email'
-    - task: AWSShellScript@1
+    # - task: AWSShellScript@1
+    #   inputs:
+    #     awsCredentials: 'aws dev'
+    #     regionName: 'us-east-1'
+    #     scriptType: 'inline'
+    #     inlineScript: |
+    #       # You can write your script inline here
+    #       $(aws ecr get-login --no-include-email --region us-east-1)
+    - task: Bash@3
       inputs:
-        awsCredentials: 'aws dev'
-        regionName: 'us-east-1'
-        scriptType: 'inline'
-        inlineScript: |
-          # You can write your script inline here
-          $(aws ecr get-login --no-include-email --region us-east-1)
-
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          docker login -u AWS -p eyJwYXlsb2FkIjoiQk9KWVNuQ1N5anpLQmMyK0tsWGYyQTdPTzZiMlNyOWE2OVVTNS9ZcFQrNDhuWUQ3UmNxbTBLY2lFWnVCYXhFNzF4YmJmekE4Y2o0ZnJ1SUlnNytkYU9ITXcwQzdNb2tBVmw2UlBGazJic1FrSHlLbGZ0K2dmbzc0MEhiUFlyRTM3R0pSbmgvZURZeGkyKzg1OE9PUzFrbk14NDIwQmdqaHhkTGZvVmluOERxTzR3TXJCSDFyV2N0bXhzQXU0VE8zTG5lRmw5ZHhOb3U5N0h1b0VZKzIwdkZHcGd2eWR2VXl0NU9pMzU0d1gzUWJjZDlsSGFza25jb3RPdHJxT0VvSnFYV3ZmejlnZU5pRmRhQllVME9hY1NUamFXaWZkWlo3ZEc1Q2h3SmZ6ZXJ4bmpqRHpGRHV2ZHBld1BaeUNLR1hyamFMYXkwemZ1QU1MbldhalMyajYvc2pZTkV5cnBwL3RVUUlXSi9OYXlVbjlIWjJaNzV4TUN5M2Y3R1VpOTJJbEd2SU1pY2JDcXM4MDFNRWo2TnhZeXRJUmg0eTJpMlQ2VDZ2c0VQaEVWdUEwWFZMcHpybG1oalhRa1B6RkVCMkJPN2NRWllNQ3YyWkZxWG80am00akpyakY2Qk9RTU5XWWVrejJ2NXJEcXl1L3JtS3lVemJ2dUVab0VkU2ZEMitzZHZNR2E0c3pXZ3pQNU4zRERSN1FMc3V5UEpDUm5tZlZmTW9Nd29iZVdoUEtScHppQzNOOWNQYWhOdjlrQWFUZHp2aEZEU044WStKOE9VUFZUZ0pyaDdIK09vbE1DZ2lZZ1h3SUpXZjRtYXl0SURRQ3VHRnJ4bnlRZ3VqYVppNlRmc1RMazlKaThqUWRjWmp3b21PU0htQTFpVksxN0MzTE5pZEZWanhxb09XY1VzYkdKYUF0ZWhkUUFpRnVDdit6eHFreTVNREhoUjhRMzNqNkQzZE12TTBBUGtuMzM3MG5uTjJIOW41anRSZHBzQkFoZTB2T2Y4Y2VrME51akdzcHdOYUZIZGpNYm1ZZ1poMUxsb1doREJaOW1tcEg3Vy9SNlVoK2FGN2NZelpGWHRYeFVzTTVWZC96VFczcmdRd3NLM3B0L1ArTUEwR0ZQYjhtbXJva2Y1aktBV0lRUVJwMC94ZXdZUE9wdlN5VFNqbVpXRit3WExuMW85cUFxNHZQSkxNVXN3a0xXdzFidVE4dnA1K2RKWU1Ta2RNQkhJWFJtUi8xTXV4R1J0YzlLaG1ndFZVdDFDS3MxclZNa1JTV3VWWjlGeDFUbUZrTXd1WlhTU0tnTlZwaGFVZVhOb1hkNGFhVDhWZmxLZEY4cXlHeGRNdXU4dHZUaWVKRmg4cFNUZVdnYzRSdTVtWWVjNms2SWNTOW02VlRnbFk3K203bWFJREI5aUtOR0djVUFFc3NISm1HRFpDNUh5RW1IVER1ckNNMlEvQk5MaWtBT1N1WVM4b3AybmcxMFdQK1E9PSIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVESTE0Q2s0cDNPWHF6a2g4ZkFJQkVJQTd2elVRaWV4UDd1NTcvZ1UybU5wOThPZVp4UnVWTnY5S0QwTCszQXFuL3JYd0xpaVYrVzdDV2NJb3BLRXZkNG8vOC85TmJvVStUclByUlRnPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTU3MTA3NzM1NH0= 651601520254.dkr.ecr.us-east-1.amazonaws.com
     - task: Docker@2
       inputs:
         containerRegistry: 'aws'
