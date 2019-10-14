@@ -46,7 +46,11 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'aws'
+        command: 'login'
+    
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'aws'
         repository: 'jovili/tasklist-web'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
-    
