@@ -31,7 +31,7 @@ stages:
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'aws'
+          dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
           additionalImageTags: '$(Build.BuildNumber)'
