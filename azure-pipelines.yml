@@ -20,14 +20,15 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-
-      - task: AWSCLI@1
+      - task: AWSShellScript@1
         inputs:
           awsCredentials: 'aws dev'
           regionName: 'us-east-1'
-          awsCommand: 'ecr'
-          awsSubCommand: 'get-login'
-          awsArguments: '--no-include-email'
+          scriptType: 'inline'
+          inlineScript: |
+            # You can write your script inline here
+            $(aws ecr get-login --no-include-email --region us-east-1)
+
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
@@ -37,37 +38,7 @@ stages:
           additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
           includeLatestTag: true
-      # - task: DockerCompose@0
-      #   inputs:
-      #     containerregistrytype: 'Container Registry'
-      #     dockerRegistryEndpoint: 'aws'
-      #     dockerComposeFile: '**/docker-compose.yml'
-      #     action: 'Build services'
-      #     additionalImageTags: '$(Build.BuildNumber)'
-      #     includeSourceTags: true
-      #     includeLatestTag: true
-      # - task: CopyFiles@2
-      #   inputs:
-      #     SourceFolder: 'src'
-      #     Contents: |
-      #       **/*.yml
-      #       **/*.yaml
-      #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-      # - task: PublishBuildArtifacts@1
-      #   inputs:
-      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      #     ArtifactName: 'drop'
-      #     publishLocation: 'Container'
 
-
-
-      # # - task: ECRPushImage@1
-      # #   inputs:
-      # #     awsCredentials: 'aws dev'
-      # #     regionName: 'us-east-1'
-      # #     imageSource: 'imagename'
-      # #     sourceImageName: 'tasklist-service'
-      # #     sourceImageTag: '
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
@@ -76,15 +47,5 @@ stages:
           action: 'Push services'
           additionalImageTags: '$(Build.BuildNumber)'
           includeSourceTags: true
-          includeLatestTag: true'
-      # #     repositoryName: 'relay-dev'
-      # #     pushTag: '
-      # - task: DockerCompose@0
-      #   inputs:
-      #     containerregistrytype: 'Container Registry'
-      #     dockerRegistryEndpoint: 'aws'
-      #     dockerComposeFile: '**/docker-compose.yml'
-      #     action: 'Push services'
-      #     additionalImageTags: '$(Build.BuildNumber)'
-      #     includeSourceTags: true
-      #     includeLatestTag: true
+          includeLatestTag: true
+
