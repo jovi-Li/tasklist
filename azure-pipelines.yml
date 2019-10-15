@@ -61,3 +61,15 @@ stages:
           autoCreateRepository: true
           logRequest: true
           logResponse: true
+      - task: ECRPushImage@1
+        inputs:
+          awsCredentials: 'aws dev'
+          regionName: 'us-east-1'
+          imageSource: 'imagename'
+          sourceImageName: 'jovili/tasklist-service'
+          sourceImageTag: '$(Build.BuildNumber)'
+          repositoryName: 'jovili/tasklist-web'
+          pushTag: '$(Build.BuildNumber)'
+          autoCreateRepository: true
+          logRequest: true
+          logResponse: true
