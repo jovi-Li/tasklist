@@ -68,7 +68,7 @@ stages:
           imageSource: 'imagename'
           sourceImageName: 'jovili/tasklist-service'
           sourceImageTag: '$(Build.BuildNumber)'
-          repositoryName: 'jovili/tasklist-web'
+          repositoryName: 'jovili/tasklist-service'
           pushTag: '$(Build.BuildNumber)'
           autoCreateRepository: true
           logRequest: true
