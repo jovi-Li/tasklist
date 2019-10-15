@@ -39,13 +39,25 @@ stages:
           includeSourceTags: true
           includeLatestTag: true
 
-      - task: DockerCompose@0
-        inputs:
-          containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'aws'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Push services'
-          additionalImageTags: '$(Build.BuildNumber)'
-          includeSourceTags: true
-          includeLatestTag: true
+      # - task: DockerCompose@0
+      #   inputs:
+      #     containerregistrytype: 'Container Registry'
+      #     dockerRegistryEndpoint: 'aws'
+      #     dockerComposeFile: '**/docker-compose.yml'
+      #     action: 'Push services'
+      #     additionalImageTags: '$(Build.BuildNumber)'
+      #     includeSourceTags: true
+      #     includeLatestTag: true
 
+      - task: ECRPushImage@1
+        inputs:
+          awsCredentials: 'aws dev'
+          regionName: 'us-east-1'
+          imageSource: 'imagename'
+          sourceImageName: 'jovili/tasklist-web'
+          sourceImageTag: '$(Build.BuildNumber)'
+          repositoryName: 'jovili/tasklist-web'
+          pushTag: '$(Build.BuildNumber)'
+          autoCreateRepository: true
+          logRequest: true
+          logResponse: true
