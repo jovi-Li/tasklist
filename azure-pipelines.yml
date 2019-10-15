@@ -32,7 +32,7 @@ stages:
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
+          dockerRegistryEndpoint: 'aws'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Build services'
           additionalImageTags: '$(Build.BuildNumber)'
@@ -42,7 +42,7 @@ stages:
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Container Registry'
-          dockerRegistryEndpoint: 'jovi''s Docker Hub Connection'
+          dockerRegistryEndpoint: 'aws'
           dockerComposeFile: '**/docker-compose.yml'
           action: 'Push services'
           additionalImageTags: '$(Build.BuildNumber)'
